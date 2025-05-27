@@ -132,7 +132,7 @@ public class CustomThreadPool implements CustomExecutor {
             rejectedHandler.rejectedExecution(task, this);
         } else {
             metrics.recordQueueSize(targetQueue.size());
-            logger.fine("[QUEUE] Task submitted to queue " + queues.indexOf(targetQueue) + ": " + task);
+            logger.info("[QUEUE] Task submitted to queue " + queues.indexOf(targetQueue) + ": " + task);
         }
     }
 
@@ -211,7 +211,7 @@ public class CustomThreadPool implements CustomExecutor {
                     if (task != null) {
                         activeThreads.incrementAndGet();
                         try {
-                            logger.fine("[WORKER " + Thread.currentThread().getName() + "] Running task: " + task);
+                            logger.info("[WORKER " + Thread.currentThread().getName() + "] Running task: " + task);
                             long startTime = System.nanoTime();
                             task.run();
                             long duration = System.nanoTime() - startTime;
@@ -276,7 +276,7 @@ public class CustomThreadPool implements CustomExecutor {
         public Thread newThread(Runnable r) {
             Thread t = new Thread(r, "CustomThreadPool-Worker-" + threadNumber.getAndIncrement());
             t.setDaemon(false);
-            logger.fine("[FACTORY] Created new thread: " + t.getName());
+            logger.info("[FACTORY] Created new thread: " + t.getName());
             return t;
         }
     }
