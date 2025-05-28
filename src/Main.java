@@ -1,6 +1,5 @@
 import home.work.executor.CustomExecutor;
 import home.work.metrics.Metrics;
-import home.work.policy.CallerRunsPolicy;
 import home.work.pool.CustomThreadPool;
 
 import java.util.concurrent.RejectedExecutionException;
@@ -20,6 +19,7 @@ public class Main {
 
         int rejected = 0;
 
+        long startTime = System.currentTimeMillis();
         for (int i = 1; i <= TASK_COUNT; i++) {
             try {
                 executor.execute(new WorkerTask(i));
@@ -35,6 +35,7 @@ public class Main {
             logger.info("Waiting end tasks...");
         }
 
+        long endTime = System.currentTimeMillis();
         Metrics metrics = executor.getMetrics();
 
         logger.info("[METRICS] Total tasks executed: %d".formatted(metrics.getTotalTasks()));
@@ -43,6 +44,7 @@ public class Main {
         logger.info("[METRICS] Rejected tasks: %d".formatted(metrics.getRejectedTasks()));
 
         int execute = TASK_COUNT - rejected;
+        logger.info("[MAIN] Total time: %d".formatted(endTime - startTime));
         logger.info("[MAIN] Completed tasks: %d".formatted(execute));
         logger.info("[MAIN] Rejected tasks: %d".formatted(rejected));
     }
