@@ -135,3 +135,49 @@
 - Расширяемая система метрик
 
 Для большинства случаев стандартный ThreadPoolExecutor будет достаточным, но в высоконагруженных системах с особыми требованиями представленная реализация может быть более эффективной.
+
+## Инструкция по запуску
+
+1. **Склонируйте репозиторий:**
+   ```sh
+   git clone https://github.com/d-dmitriev/MephiCoursework1.git
+   cd MephiCoursework1
+   ```
+
+2. **Соберите проект:**
+   - Если используете IDE (IntelliJ IDEA, Eclipse) — просто откройте проект как Java-проект.
+   - Если используете консоль и у вас установлен `javac`, выполните:
+     ```sh
+     javac -d out src/**/*.java
+     ```
+
+3. **Запустите демонстрационную программу:**
+   - В консоли:
+     ```sh
+     java -cp out Main
+     ```
+   - Или запустите `Main` через IDE.
+
+4. **Ожидаемый результат:**
+   - В консоль будут выводиться логи о создании потоков, выполнении и отклонении задач, а также итоговые метрики работы пула.
+
+### Пример вывода
+
+```
+[POOL] Worker created. Current pool size: 1
+[POOL] Worker created. Current pool size: 2
+...
+[TASK] Task 1 start running in thread MyPool-worker-1
+...
+[REJECT] Task 85 rejected
+...
+[METRICS] Total tasks executed: 80
+[METRICS] Average execution time: 2003.12 ms
+[MAIN] Completed tasks: 80
+[MAIN] Rejected tasks: 20
+```
+
+---
+
+**Примечание:**  
+Если возникнут проблемы с запуском или сборкой, убедитесь, что у вас установлена Java 17 или выше.
